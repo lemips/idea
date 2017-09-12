@@ -3,13 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="8dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView.title"/>
+        android:id="@+id/textView.title"
+        android:padding="4dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Idea Title"
+        android:textColor="@color/color_grey_900"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView.content"/>
+        android:id="@+id/textView.content"
+        android:padding="4dp"
+        android:textSize="14sp"
+        android:text="Idea Content"
+        android:textColor="@color/color_grey_800"/>
 </LinearLayout>

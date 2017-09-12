@@ -5,6 +5,7 @@ package com.lemips.idea;
  */
 
 public class Idea {
+    private int id;
     private String title;
     private String content;
 
@@ -13,6 +14,14 @@ public class Idea {
     public Idea(String title, String content){
         this.title = title;
         this.content = content;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getContent() {
