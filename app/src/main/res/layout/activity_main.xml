@@ -17,5 +17,6 @@
         android:layout_margin="16dp"
         android:layout_gravity="bottom|end"
         android:src="@drawable/vector_lightbulb_outline_black_24dp"
-        android:tint="@color/color_grey_50"/>
+        android:tint="@color/color_grey_50"
+        android:id="@+id/fav.newIdea"/>
 </android.support.design.widget.CoordinatorLayout>

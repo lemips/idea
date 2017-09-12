@@ -2,6 +2,7 @@ package com.lemips.idea;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -29,6 +30,23 @@ public class IdeaFactory extends SQLiteOpenHelper {
         db.close();
     }
 
+    public synchronized Idea get(int ideaId){
+        String query = "select * from idea where id = ?";
+        String[] selectedArgs = {String.valueOf(ideaId)};
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, selectedArgs);
+        Idea idea = null;
+        if (cursor.moveToFirst()){
+            idea = new Idea(
+                    cursor.getString(cursor.getColumnIndex("title")),
+                    cursor.getString(cursor.getColumnIndex("content")));
+            idea.setId(ideaId);
+        }
+        cursor.close();
+        db.close();
+        return idea;
+    }
+
     public synchronized void update(Idea idea){
         ContentValues values = new ContentValues();
         values.put("title", idea.getTitle());
@@ -47,11 +65,21 @@ public class IdeaFactory extends SQLiteOpenHelper {
 
     public synchronized List<Idea> getAllIdea(){
         List<Idea> ideaList = new ArrayList<>();
-        String[] numbers = new String[]{"One","Two","Three","Four", "Five"};
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from idea", null);
 
-        for(String number : numbers)
-            ideaList.add(new Idea("Idea : " + number,"Content Of Idea " + number));
-
+        if (cursor.moveToFirst()){
+            do {
+                Idea idea = new Idea(
+                        cursor.getString(cursor.getColumnIndex("title")),
+                        cursor.getString(cursor.getColumnIndex("content")));
+                idea.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                ideaList.add(idea);
+            }
+            while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
         return ideaList;
     }
 

@@ -5,7 +5,9 @@ package com.lemips.idea;
  */
 
 public class Idea {
-    private int id;
+    private static final int defaultId = -1;
+
+    private int id = defaultId;
     private String title;
     private String content;
 
